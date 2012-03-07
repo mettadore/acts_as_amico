@@ -8,4 +8,6 @@ doc
 .idea
 *.sqlite3
 *.log
+.DS_Store
+
 

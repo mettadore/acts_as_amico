@@ -1,4 +1,5 @@
 require 'redis'
+require 'amico'
 require 'acts_as_amico'
 require 'acts_as_amico/version'
 
