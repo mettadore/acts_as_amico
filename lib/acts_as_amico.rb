@@ -1,3 +1,4 @@
+require 'rails/all'
 require 'redis'
 require 'amico'
 require 'acts_as_amico'
@@ -8,3 +9,6 @@ module ActsAsAmico
 
   require 'acts_as_amico/railtie'
 end
+
+ActiveRecord::Base.send :include, ActsAsAmico::AmicoUser
+ActiveResource::Base.send :include, ActsAsAmico::AmicoUser
