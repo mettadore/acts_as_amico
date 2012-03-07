@@ -160,8 +160,8 @@ describe Amico::Relationships do
         userc = Factory :user
         @usera.follow(@userb)
         userc.follow(@userb)
-        @usera.followers(@userb).should eql(["2", "1"])
-        @usera.followers(@userb, :page => 5).should eql(["2", "1"])
+        @usera.followers.should eql(["2", "1"])
+        @usera.followers(:page => 5).should eql(["2", "1"])
       end
 
       it 'should page correctly' do
@@ -239,46 +239,6 @@ describe Amico::Relationships do
         userc.follow(@usera)
         @usera.follow(userd)
         @usera.reciprocated_count.should be(2)
-      end
-    end
-
-    describe '#following_page_count' do
-      it 'should return the correct count' do
-        add_reciprocal_followers
-
-        @usera.following_page_count.should be(1)
-        @usera.following_page_count(10).should be(3)
-        @usera.following_page_count(5).should be(5)
-      end
-    end
-
-    describe '#followers_page_count' do
-      it 'should return the correct count' do
-        add_reciprocal_followers
-
-        @usera.followers_page_count.should be(1)
-        @usera.followers_page_count( 10).should be(3)
-        @usera.followers_page_count( 5).should be(5)
-      end
-    end
-
-    describe '#blocked_page_count' do
-      it 'should return the correct count' do
-        add_reciprocal_followers(26, true)
-
-        @usera.blocked_page_count.should be(1)
-        @usera.blocked_page_count( 10).should be(3)
-        @usera.blocked_page_count( 5).should be(5)
-      end
-    end
-
-    describe '#reciprocated_page_count' do
-      it 'should return the correct count' do
-        add_reciprocal_followers
-
-        @usera.reciprocated_page_count.should be(1)
-        @usera.reciprocated_page_count(10).should be(3)
-        @usera.reciprocated_page_count(5).should be(5)
       end
     end
 
