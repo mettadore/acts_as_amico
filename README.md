@@ -34,7 +34,7 @@ Amico.configure do |configuration|
 end
 ```
 
-### Amico module loadable methods:
+### Basic Usage
 
 ```ruby
 require 'amico'
@@ -130,12 +130,14 @@ usera.reciprocated
  => ["11"]
 ```
 
-You can also use non-id keys:
+### Non-ID Keys
+You can also use non-id keys
 
 ```ruby
 class Admin < ActiveRecord::Base
-  acts_as_amico :amico_key => "name"
-  validates_uniqueness_of :name  # -> do this or be sorry :)
+  acts_as_amico :amico_key => :name
+  validates_uniqueness_of :name  # -> do this or be sorry
+  validates_presence_of :name # -> this too, you've been warned
 end
 
 usera = User.create
@@ -158,6 +160,37 @@ usera.followers
  => ["frank"]
 ```
 
+### ActiveResource Models
+
+You can use active resource models as well
+
+```ruby
+class RestObject < ActiveResource::Base
+  acts_as_amico :amico_key => :title
+end
+
+usera = User.create
+
+rest_object = RestObject.find(123)
+
+rest_object.title
+ => "Bread and Circus"
+
+usera.follow! rest_object
+
+usera.following? rest_object
+ => true
+
+usera.following
+ => ["Bread and Circus"]
+```
+
+One note about ActiveResource: You have to be careful what you use as the :amico_key. For
+instance, using ```acts_as_amico :amico_key => :name``` is an exceptionally bad idea because
+this will cause a ```SystemStackError: stack level too deep``` because acts_as_amico uses
+the Rails::Object#send method to get the key, and for some reason if the send method even
+*touches* the string/symbol "name" we get cascaded through the object graph.
+
 ## Documentation 
 
 Acts_as_amico is feature complete with the amico gem. [The Amico API usage page](https://github.com/mettadore/amico/blob/master/API.md)
@@ -167,7 +200,7 @@ is well-documented. There are some simple examples in the method documentation. 
 
 ## Future Plans
 
-Clean up the ActiveResource integration
+Clean up the ActiveResource integration and figure out why :name is so dangerous.
 
 ## Contributing to acts_as_amico
  

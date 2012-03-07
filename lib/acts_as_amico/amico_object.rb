@@ -1,5 +1,5 @@
 module ActsAsAmico
-  module AmicoUser
+  module AmicoObject
 
     def self.included(base)
       base.extend ClassMethods
@@ -8,7 +8,7 @@ module ActsAsAmico
     module ClassMethods
 
       def amico_key
-        @amico_key ||= "id"
+        @amico_key ||= :id
       end
       def amico_key= value
         @amico_key = value
@@ -17,8 +17,8 @@ module ActsAsAmico
       def acts_as_amico *args
         options = args.extract_options!
         options.assert_valid_keys(:amico_key)
-        @amico_key = options[:amico_key] ? options[:amico_key] : "id"
-        include ActsAsAmico::AmicoUser::InstanceMethods
+        @amico_key = options[:amico_key] ? options[:amico_key] : :id
+        include ActsAsAmico::AmicoObject::InstanceMethods
       end
     end
 

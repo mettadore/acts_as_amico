@@ -10,8 +10,8 @@ describe ActsAsAmico do
   end
 
   it "should allow both id and non-id keys" do
-    @usera.class.amico_key.should eq("id")
-    @admin.class.amico_key.should eq("name")
+    @usera.class.amico_key.should eq(:id)
+    @admin.class.amico_key.should eq(:name)
   end
 
   describe '#follow' do

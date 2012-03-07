@@ -6,13 +6,13 @@ module ActsAsAmico
 
     initializer "acts_as_amico.active_record" do |app|
       ActiveSupport.on_load :active_record do
-        include ActsAsAmico::AmicoUser
+        include ActsAsAmico::AmicoObject
       end
     end
 
     initializer "acts_as_amico.active_resource" do |app|
       ActiveSupport.on_load :active_resource do
-        include ActsAsAmico::AmicoUser
+        include ActsAsAmico::AmicoObject
       end
     end
 

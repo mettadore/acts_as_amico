@@ -5,10 +5,10 @@ require 'acts_as_amico'
 require 'acts_as_amico/version'
 
 module ActsAsAmico
-  autoload :AmicoUser,    'acts_as_amico/amico_user'
+  autoload :AmicoObject,    'acts_as_amico/amico_object'
 
   require 'acts_as_amico/railtie'
 end
 
-ActiveRecord::Base.send :include, ActsAsAmico::AmicoUser
-ActiveResource::Base.send :include, ActsAsAmico::AmicoUser
+ActiveRecord::Base.send :include, ActsAsAmico::AmicoObject
+ActiveResource::Base.send :include, ActsAsAmico::AmicoObject
