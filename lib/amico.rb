@@ -8,8 +8,8 @@ module Amico
   extend Configuration
   extend Relationships
 
-  require 'amico/railtie' if defined?(Rails) && Rails::Version::Major >= 3
+  require 'amico/railtie'
 end
 
-ActiveRecord::Base.send :include, Amico::AmicoUser
-ActiveResource::Base.send :include, Amico::AmicoUser
+#ActiveRecord::Base.send :include, Amico::AmicoUser
+#ActiveResource::Base.send :include, Amico::AmicoUser

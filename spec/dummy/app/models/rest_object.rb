@@ -1,6 +1,6 @@
 class RestObject < ActiveResource::Base
 
-  is_amico
+  #is_amico
 
   self.site = "http://api.sample.com"
 

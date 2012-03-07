@@ -9,6 +9,6 @@ Amico.configure do |configuration|
   configuration.reciprocated_key = 'reciprocated'
   configuration.pending_key = 'pending'
   configuration.default_scope_key = 'user'
-  configuration.pending_follow = true
+  configuration.pending_follow = false
   configuration.page_size = 25
 end

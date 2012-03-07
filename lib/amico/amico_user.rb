@@ -25,6 +25,10 @@ module Amico
         Amico.following(self.id, scope)
       end
 
+      def following_count scope = Amico.default_scope_key
+        Amico.following_count(self.id)
+      end
+
       def pending? obj, scope = Amico.default_scope_key
         Amico.pending(self.id, obj.id, scope)
       end
@@ -37,8 +41,20 @@ module Amico
         Amico.follower?(obj.id, self.id, scope)
       end
 
+      def followers_count
+        Amico.followers_count(self.id)
+      end
+
       def reciprocated? obj, scope = Amico.default_scope_key
         Amico.reciprocated?(self.id, obj.id, scope)
+      end
+
+      def reciprocated scope = Amico.default_scope_key
+        Amico.reciprocated(self.id, scope)
+      end
+
+      def reciprocated_count
+        Amico.reciprocated_count(self.id)
       end
 
       def unfollow obj, scope = Amico.default_scope_key
@@ -55,6 +71,10 @@ module Amico
 
       def blocked? obj, scope = Amico.default_scope_key
         Amico.blocked?(self.id, obj.id, scope)
+      end
+
+      def blocked scope = Amico.default_scope_key
+        Amico.blocked(self.id, scope)
       end
     end
   end
