@@ -5,9 +5,9 @@ require 'amico/version'
 Gem::Specification.new do |s|
   s.name        = "amico"
   s.version     = Amico::VERSION
-  s.authors     = ["David Czarnecki"]
-  s.email       = ["dczarnecki@agoragames.com"]
-  s.homepage    = "https://github.com/agoragames/amico"
+  s.authors     = ["John Metta"]
+  s.email       = ["mail@johnmetta.com"]
+  s.homepage    = "https://github.com/hydrasi/amico"
   s.summary     = %q{Relationships (e.g. friendships) backed by Redis}
   s.description = %q{Relationships (e.g. friendships) backed by Redis}
 
@@ -22,4 +22,8 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('rake')
   s.add_development_dependency('rspec')
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "sqlite3"
+  s.add_development_dependency 'factory_girl'
+  s.add_development_dependency 'fakeweb'
 end

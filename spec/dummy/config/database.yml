@@ -1,0 +1,12 @@
+common: &common
+  adapter: postgresql
+  username: rails_user
+  password: abc123
+
+development:
+  <<: *common
+  database: acts_permissive_dev
+
+test:
+  <<: *common
+  database: acts_permissive_test
