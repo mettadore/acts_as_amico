@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 describe Amico::Relationships do
   describe '#follow' do
     it 'should allow you to follow' do
