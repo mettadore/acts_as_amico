@@ -1,8 +1,8 @@
-require 'amico'
+require 'acts_as_amico'
 
 Amico.configure do |configuration|
   configuration.redis = Redis.new
-  configuration.namespace = 'amico'
+  configuration.namespace = 'acts_as_amico'
   configuration.following_key = 'following'
   configuration.followers_key = 'followers'
   configuration.blocked_key = 'blocked'

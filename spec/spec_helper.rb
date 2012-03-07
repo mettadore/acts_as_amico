@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'rspec'
 require 'amico'
+require 'acts_as_amico'
 require 'factory_girl'
 require 'fakeweb'
 

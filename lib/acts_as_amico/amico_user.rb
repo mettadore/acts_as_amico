@@ -1,4 +1,4 @@
-module Amico
+module ActsAsAmico
   module AmicoUser
 
     def self.included(base)
@@ -18,7 +18,7 @@ module Amico
         options = args.extract_options!
         options.assert_valid_keys(:amico_key)
         @amico_key = options[:amico_key] ? options[:amico_key] : "id"
-        include Amico::AmicoUser::InstanceMethods
+        include ActsAsAmico::AmicoUser::InstanceMethods
       end
     end
 

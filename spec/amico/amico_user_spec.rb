@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Amico::Relationships do
+describe ActsAsAmico do
   describe "acts_as_amico style" do
     before :each do
       @usera = Factory :user
