@@ -6,3 +6,6 @@ pkg/*
 doc
 *.rdb
 .idea
+*.sqlite3
+*.log
+
