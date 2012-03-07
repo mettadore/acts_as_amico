@@ -1,5 +1,5 @@
 class Admin < ActiveRecord::Base
-  is_amico :amico_key => "name"
+  acts_as_amico :amico_key => "name"
   validates_uniqueness_of :name
   before_validation :set_name
 

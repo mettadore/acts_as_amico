@@ -1,3 +1,3 @@
 class User < ActiveRecord::Base
-  is_amico
+  acts_as_amico
 end

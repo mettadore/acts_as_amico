@@ -14,7 +14,7 @@ module Amico
         @amico_key = value
       end
 
-      def is_amico *args
+      def acts_as_amico *args
         options = args.extract_options!
         options.assert_valid_keys(:amico_key)
         @amico_key = options[:amico_key] ? options[:amico_key] : "id"

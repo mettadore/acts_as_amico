@@ -54,7 +54,7 @@ Amico.configure do |configuration|
 end
 
 class User < ActiveRecord::Base
- is_amico
+ acts_as_amico
 end
 
 usera = User.create
@@ -134,7 +134,7 @@ You can also use non-id keys:
 
 ```ruby
 class Admin < ActiveRecord::Base
-  is_amico :amico_key => "name"
+  acts_as_amico :amico_key => "name"
   validates_uniqueness_of :name  # -> do this or be sorry :)
 end
 
