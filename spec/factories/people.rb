@@ -1,3 +1,4 @@
+require 'uuidtools'
 FactoryGirl.define do
 
   factory :user do
@@ -5,7 +6,7 @@ FactoryGirl.define do
   end
 
   factory :admin do
-    sequence(:name) { |i| "Admin User #{i}" }
+    sequence(:name) { UUIDTools::UUID.random_create.to_str }
   end
 
 end

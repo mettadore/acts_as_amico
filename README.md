@@ -34,7 +34,130 @@ Amico.configure do |configuration|
 end
 ```
 
-Use amico:
+### Amico module loadable methods:
+
+```ruby
+require 'amico'
+ => true
+
+Amico.configure do |configuration|
+  configuration.redis = Redis.new
+  configuration.namespace = 'amico'
+  configuration.following_key = 'following'
+  configuration.followers_key = 'followers'
+  configuration.blocked_key = 'blocked'
+  configuration.reciprocated_key = 'reciprocated'
+  configuration.pending_key = 'pending'
+  configuration.default_scope_key = 'default'
+  configuration.pending_follow = false
+  configuration.page_size = 25
+end
+
+class User < ActiveRecord::Base
+ is_amico
+end
+
+usera = User.create
+userb = user.create
+
+usera.follow! userb
+=> nil
+
+usera.following? userb
+ => true
+
+userb.following? usera
+ => false
+
+userb.follow! usera
+ => [1, 1]
+
+userb.following? usera
+ => true
+
+usera.following_count
+ => 1
+
+usera.followers_count
+ => 1
+
+userb.unfollow! usera
+ => [1, 1, 1, 1, 0]
+
+userb.following_count
+ => 0
+
+usera.following_count
+ => 1
+
+usera.follower? userb
+ => false
+
+puts userb.id
+ => 11
+
+usera.following
+ => ["11"]
+
+usera.block! userb
+ => [1, 0, 1, 0, 0, 0, 0, 1]
+
+userb.following? usera
+ => false
+
+usera.blocked? userb
+ => true
+
+usera.unblock! userb
+ => true
+
+usera.blocked? userb
+ => false
+
+userb.follow! usera
+ => nil
+
+usera.follow! userb
+ => [1, 1]
+
+usera.reciprocated? userb
+ => true
+
+puts userb.id
+ => 11
+
+usera.reciprocated
+ => ["11"]
+```
+
+You can also use non-id keys:
+```ruby
+class Admin < ActiveRecord::Base
+  is_amico :amico_key => "name"
+  validates_uniqueness_of :name  # -> do this or be sorry :)
+end
+
+usera = User.create
+
+puts usera.id
+ => 18
+
+admin = Admin.create :name => "frank"
+
+usera.follow! admin
+ => nil
+
+admin.follow! usera
+ => [1, 1]
+
+admin.followers
+ => ["18"]
+
+usera.followers
+ => ["frank"]
+```
+
+### amico base methods:
 
 ```ruby
 require 'amico'
