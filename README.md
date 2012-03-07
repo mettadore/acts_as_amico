@@ -1,6 +1,6 @@
 # acts_as_amico
 
-ActiveModel injectable relationships (e.g. friendships) backed by Redis.
+ActiveModel injectable relationships (e.g. friendships) backed by Redis using the [Amico](https://github.com/agoragames/amico) gem
 
 ## Installation
 
