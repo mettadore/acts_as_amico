@@ -131,6 +131,7 @@ usera.reciprocated
 ```
 
 You can also use non-id keys:
+
 ```ruby
 class Admin < ActiveRecord::Base
   is_amico :amico_key => "name"
