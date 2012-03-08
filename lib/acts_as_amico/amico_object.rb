@@ -12,7 +12,7 @@ module ActsAsAmico
 
       def acts_as_amico *args
         options = args.extract_options!
-        options.assert_valid_keys(:meh)
+        options.assert_valid_keys(:amico_key)
         @amico_key = options[:amico_key]
         include ActsAsAmico::AmicoObject::InstanceMethods
       end
@@ -40,6 +40,11 @@ module ActsAsAmico
 
       def respond_to?(sym)
         pass_sym_to_amico(sym) || super(sym)
+      end
+
+      def followers options = {}
+        key = options[:scope] || Amico.default_scope_key
+        Amico.followers(amico_key, options, key)
       end
 
       # Named destructive methods

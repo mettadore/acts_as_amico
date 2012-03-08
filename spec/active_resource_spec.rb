@@ -38,12 +38,12 @@ describe ActsAsAmico do
   it "should follow" do
     @usera.follow! @admin, 'admin'
     @usera.following?(@admin, 'admin').should be_true
-    @admin.followers({},'admin').include?(@usera.amico_key).should be_true
+    @admin.followers(:scope => 'admin').include?(@usera.amico_key.to_s).should be_true
   end
   it "should allow following an ActiveResource object" do
     @usera.follow! @rest_object, 'rest_object'
     @usera.following?(@rest_object, 'rest_object').should be_true
 
-    @rest_object.followers({},'admin').include?(@usera.amico_key, 'rest_object').should be_true
+    @rest_object.followers(:scope => 'rest_object').include?(@usera.amico_key.to_s).should be_true
   end
 end
