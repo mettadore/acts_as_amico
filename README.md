@@ -191,7 +191,7 @@ this will cause a ```SystemStackError: stack level too deep``` because acts_as_a
 the Rails::Object#send method to get the key, and for some reason if the send method even
 *touches* the string/symbol "name" we get cascaded through the object graph.
 
-## Documentation 
+## Documentation
 
 Acts_as_amico is feature complete with the amico gem. [The Amico API usage page](https://github.com/mettadore/amico/blob/master/API.md)
 shows a more complete suite of methods. The source for the [Amico relationships module](https://github.com/agoragames/amico/blob/master/lib/amico/relationships.rb)

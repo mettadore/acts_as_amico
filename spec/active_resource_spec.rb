@@ -24,14 +24,26 @@ describe ActsAsAmico do
     @rest_object = RestObject.find(321)
   end
 
-  it "should hold an amico_key" do
-    @rest_object.class.amico_key.should eq(:title)
+  it "Should respond to amico_key on the class" do
+    RestObject.respond_to?(:amico_key).should be_true
+  end
+  it "should set the amico_key on the class" do
+    RestObject.amico_key.should be(:title)
   end
 
+  it "should hold an amico_key" do
+    @rest_object.amico_key.should eq("Blah")
+  end
+
+  it "should follow" do
+    @usera.follow! @admin, 'admin'
+    @usera.following?(@admin, 'admin').should be_true
+    @admin.followers({},'admin').include?(@usera.amico_key).should be_true
+  end
   it "should allow following an ActiveResource object" do
     @usera.follow! @rest_object, 'rest_object'
-#    @usera.following?(@rest_object).should be_true
+    @usera.following?(@rest_object, 'rest_object').should be_true
 
-#    @rest_object.followers.include?(@usera.id).should be_true
+    @rest_object.followers({},'admin').include?(@usera.amico_key, 'rest_object').should be_true
   end
 end
