@@ -62,8 +62,8 @@ module ActsAsAmico
         scope = options[:scope] || Amico.default_scope_key
         meth = args[0]
         raise "Must be one of #{valid_params.to_s}" if not valid_params.include? meth
-        count = self.send("#{meth}_count".to_sym, scope)
-        self.send("#{meth}", :page_size => count, :scope => scope)
+        count = self.send("#{meth.to_s}_count".to_sym, scope)
+        count > 0 ? self.send("#{meth}", :page_size => count, :scope => scope) : []
       end
 
       # Lists
