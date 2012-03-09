@@ -10,6 +10,19 @@ module ActsAsAmico
         @amico_key ||= :id
       end
 
+      def amico_methods
+        @result || begin
+          result = []
+          methods = [:following, :followers, :blocked, :reciprocated, :pending]
+          methods.each do |m|
+            ["_count", "_page_count" ].each do |s|
+              result << "#{m.to_s}#{s}".to_sym
+            end
+          end
+          result
+        end
+      end
+
       def acts_as_amico *args
         options = args.extract_options!
         options.assert_valid_keys(:amico_key)
@@ -25,7 +38,7 @@ module ActsAsAmico
       end
 
       def method_missing(sym, *args, &block)
-        if Amico.respond_to? sym
+        if self.class.amico_methods.include? sym
           args[0] = args[0].amico_key if not args[0].nil? and args[0].respond_to?(:amico_key)
           args.unshift(amico_key)
           if sym.nil?
@@ -42,26 +55,81 @@ module ActsAsAmico
         pass_sym_to_amico(sym) || super(sym)
       end
 
+      def all *args
+        options = args.extract_options!
+        options.assert_valid_keys(:scope)
+        valid_params = [:following, :followers, :blocked, :reciprocated, :pending]
+        scope = options[:scope] || Amico.default_scope_key
+        meth = args[0]
+        raise "Must be one of #{valid_params.to_s}" if not valid_params.include? meth
+        count = self.send("#{meth}_count".to_sym, scope)
+        self.send("#{meth}", :page_size => count, :scope => scope)
+      end
+
+      # Lists
       def followers options = {}
-        key = options[:scope] || Amico.default_scope_key
-        Amico.followers(amico_key, options, key)
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.followers amico_key, options, scope
+      end
+      def following options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.following amico_key, options, scope
+      end
+      def reciprocated options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.reciprocated amico_key, options, scope
+      end
+      def pending options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.pending amico_key, options, scope
+      end
+      def blocked options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.blocked amico_key, options, scope
       end
 
       # Named destructive methods
-      def follow! obj, *args
-        Amico.follow(amico_key, obj.amico_key, *args)
+      def follow! obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.follow(amico_key, obj.amico_key, scope)
       end
-      def unfollow! obj, *args
-        Amico.unfollow(amico_key, obj.amico_key, *args)
+      def unfollow! obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.unfollow(amico_key, obj.amico_key, scope)
       end
-      def accept! obj, *args
-        Amico.accept(amico_key, obj.amico_key, *args)
+      def accept! obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.accept(amico_key, obj.amico_key, scope)
       end
-      def block! obj, *args
-        Amico.block(amico_key, obj.amico_key, *args)
+      def block! obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.block(amico_key, obj.amico_key, scope)
       end
-      def unblock! obj, *args
-        Amico.unblock(amico_key, obj.amico_key, *args)
+      def unblock! obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.unblock(amico_key, obj.amico_key, scope)
+      end
+
+      # Booleans
+      def following? obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.following?(amico_key, obj.amico_key, scope)
+      end
+      def follower? obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.follower?(amico_key, obj.amico_key, scope)
+      end
+      def blocked? obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.blocked?(amico_key, obj.amico_key, scope)
+      end
+      def pending? obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.pending?(amico_key, obj.amico_key, scope)
+      end
+      def reciprocated? obj, options = {}
+        scope = options[:scope] || Amico.default_scope_key
+        Amico.reciprocated?(amico_key, obj.amico_key, scope)
       end
 
       private
