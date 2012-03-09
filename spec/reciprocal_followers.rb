@@ -18,7 +18,7 @@ describe ActsAsAmico do
       @user.reciprocated(:page => 1, :page_size => 5).size.should be(5)
     end
     it "should return all following" do
-      @user.all(:following).size.should be(6)
+      @user.get_all(:following).size.should be(6)
     end
   end
 

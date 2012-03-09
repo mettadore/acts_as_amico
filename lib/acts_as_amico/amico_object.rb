@@ -55,7 +55,7 @@ module ActsAsAmico
         pass_sym_to_amico(sym) || super(sym)
       end
 
-      def all *args
+      def get_all *args
         options = args.extract_options!
         options.assert_valid_keys(:scope)
         valid_params = [:following, :followers, :blocked, :reciprocated, :pending]
