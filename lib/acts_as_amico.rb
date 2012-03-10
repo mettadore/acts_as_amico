@@ -6,8 +6,6 @@ require 'acts_as_amico/version'
 
 module ActsAsAmico
   autoload :AmicoObject,    'acts_as_amico/amico_object'
-
-  require 'acts_as_amico/railtie'
 end
 
 ActiveRecord::Base.send :include, ActsAsAmico::AmicoObject

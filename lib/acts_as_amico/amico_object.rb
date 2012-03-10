@@ -27,7 +27,7 @@ module ActsAsAmico
         options = args.extract_options!
         options.assert_valid_keys(:amico_key)
         @amico_key = options[:amico_key]
-        include ActsAsAmico::AmicoObject::InstanceMethods
+        send :include, ActsAsAmico::AmicoObject::InstanceMethods
       end
     end
 
@@ -95,6 +95,9 @@ module ActsAsAmico
       end
       def unfollow! obj, options = {}
         scope = options[:scope] || Amico.default_scope_key
+        puts amico_key
+        puts obj.amico_key
+        puts scope
         Amico.unfollow(amico_key, obj.amico_key, scope)
       end
       def accept! obj, options = {}
