@@ -95,9 +95,6 @@ module ActsAsAmico
       end
       def unfollow! obj, options = {}
         scope = options[:scope] || Amico.default_scope_key
-        puts amico_key
-        puts obj.amico_key
-        puts scope
         Amico.unfollow(amico_key, obj.amico_key, scope)
       end
       def accept! obj, options = {}
