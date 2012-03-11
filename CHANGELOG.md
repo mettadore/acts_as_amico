@@ -1,16 +1,13 @@
-# 2.0.0
+# 0.2.7
 
-* Added `Amico.default_scope_key` and `scope` parameter to all of the methods to allow you to scope the calls to express relationships for different types of things
+* Update gemspec to allow rails version past 3.1.1
+* Clean console printing in AmicoObject.unfollow!
+* Update Readme
 
-# 1.2.0
+# 0.2.6
 
-* Added pending to relationships
+* Remove Railtie autoloading
 
-# 1.1.0
+# History
 
-* Added blocking to relationships
-* Added reciprocated to relationships
-
-# 1.0.0 (2012-01-11)
-
-* Initial release
+* Meh

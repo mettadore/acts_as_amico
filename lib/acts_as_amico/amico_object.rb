@@ -51,8 +51,8 @@ module ActsAsAmico
         end
       end
 
-      def respond_to?(sym)
-        pass_sym_to_amico(sym) || super(sym)
+      def respond_to?(sym, include_private=false)
+        pass_sym_to_amico(sym) || super(sym, include_private)
       end
 
       def get_all *args
@@ -95,9 +95,6 @@ module ActsAsAmico
       end
       def unfollow! obj, options = {}
         scope = options[:scope] || Amico.default_scope_key
-        puts amico_key
-        puts obj.amico_key
-        puts scope
         Amico.unfollow(amico_key, obj.amico_key, scope)
       end
       def accept! obj, options = {}

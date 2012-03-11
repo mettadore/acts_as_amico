@@ -15,31 +15,13 @@ gem 'acts_as_amico'
 Make sure your redis server is running! Redis configuration is outside the scope of this README, but 
 check out the Redis documentation, http://redis.io/documentation.
   
-## Usage
-
-Configure amico:
-
-```ruby
-Amico.configure do |configuration|
-  configuration.redis = Redis.new
-  configuration.namespace = 'amico'
-  configuration.following_key = 'following'
-  configuration.followers_key = 'followers'
-  configuration.blocked_key = 'blocked'
-  configuration.reciprocated_key = 'reciprocated'
-  configuration.pending_key = 'pending'
-  configuration.default_scope_key = 'default'
-  configuration.pending_follow = false
-  configuration.page_size = 25
-end
-```
-
 ### Basic Usage
 
 ```ruby
-require 'amico'
+require 'acts_as_amico'
  => true
 
+# Configure the Amico sub-framework
 Amico.configure do |configuration|
   configuration.redis = Redis.new
   configuration.namespace = 'amico'
