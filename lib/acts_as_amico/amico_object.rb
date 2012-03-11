@@ -51,8 +51,8 @@ module ActsAsAmico
         end
       end
 
-      def respond_to?(sym)
-        pass_sym_to_amico(sym) || super(sym)
+      def respond_to?(sym, include_private=false)
+        pass_sym_to_amico(sym) || super(sym, include_private)
       end
 
       def get_all *args
