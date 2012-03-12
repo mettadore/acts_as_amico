@@ -148,6 +148,7 @@ You can use active resource models as well
 
 ```ruby
 class RestObject < ActiveResource::Base
+  self.site = 'http://mettadore.com/junk'
   acts_as_amico :amico_key => :title
 end
 
