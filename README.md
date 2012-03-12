@@ -183,8 +183,9 @@ is well-documented. There are some simple examples in the method documentation. 
 
 ## Future Plans
 
-Clean up the ActiveResource integration and figure out why :name is so dangerous.
-
+ * Clean up the ActiveResource integration and figure out why :name is so dangerous.
+ * Better document the code
+ 
 ## Contributing to acts_as_amico
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
