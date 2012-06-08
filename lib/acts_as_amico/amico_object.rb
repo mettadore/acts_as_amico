@@ -11,7 +11,7 @@ module ActsAsAmico
       end
 
       def amico_methods
-        @result || begin
+        @result ||= begin
           result = []
           methods = [:following, :followers, :blocked, :reciprocated, :pending]
           methods.each do |m|
