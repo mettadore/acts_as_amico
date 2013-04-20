@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe ActsAsAmico do
   before :each do
-    @usera = Factory :user
-    @userb = Factory :user
-    @admin = Factory :admin
-    @widget = Factory :widget
-    @thing = Factory :thing
+    @usera = FactoryGirl.create :user
+    @userb = FactoryGirl.create :user
+    @admin = FactoryGirl.create :admin
+    @widget = FactoryGirl.create :widget
+    @thing = FactoryGirl.create :thing
   end
 
   it "should allow both id and non-id keys" do
@@ -337,7 +337,7 @@ describe ActsAsAmico do
 
   describe '#following' do
     it 'should return the correct list' do
-      userc = Factory :user
+      userc = FactoryGirl.create :user
       @usera.follow!(@userb)
       @usera.follow!(userc)
       @usera.following.should eql(["#{userc.id}", "#{@userb.send(@userb.class.amico_key)}"])
@@ -346,7 +346,7 @@ describe ActsAsAmico do
 
     describe "non-id keys" do
       it 'should return the correct list' do
-        userc = Factory :user
+        userc = FactoryGirl.create :user
         @usera.follow!(@admin)
         @usera.follow!(userc)
         @usera.following.should =~ ["#{userc.id}", "#{@admin.send(@admin.class.amico_key)}"]
@@ -357,7 +357,7 @@ describe ActsAsAmico do
 
   describe '#followers' do
     it 'should return the correct list' do
-      userc = Factory :user
+      userc = FactoryGirl.create :user
       @usera.follow!(@userb)
       userc.follow!(@userb)
       @userb.followers.should eql(["#{userc.id}", "#{@usera.send(@usera.class.amico_key)}"])
@@ -366,7 +366,7 @@ describe ActsAsAmico do
 
     describe "non-id keys" do
       it 'should return the correct list' do
-        userc = Factory :user
+        userc = FactoryGirl.create :user
         @usera.follow!(@admin)
         userc.follow!(@admin)
         @admin.followers.should eql(["#{userc.id}", "#{@usera.send(@usera.class.amico_key)}"])
@@ -377,7 +377,7 @@ describe ActsAsAmico do
 
   describe '#blocked' do
     it 'should return the correct list' do
-      userc = Factory :user
+      userc = FactoryGirl.create :user
       @usera.block!(@userb)
       @usera.block!(userc)
       @usera.blocked.should eql(["#{userc.id}", "#{@userb.send(@userb.class.amico_key)}"])
@@ -386,7 +386,7 @@ describe ActsAsAmico do
 
     describe "non-id keys" do
       it 'should return the correct list' do
-        userc = Factory :user
+        userc = FactoryGirl.create :user
         @usera.block!(@admin)
         @usera.block!(userc)
         @usera.blocked.should =~ ["#{userc.id}", "#{@admin.send(@admin.class.amico_key)}"]
@@ -448,8 +448,8 @@ describe ActsAsAmico do
 
   describe '#reciprocated_count' do
     it 'should return the correct count' do
-      userc = Factory :user
-      userd = Factory :user
+      userc = FactoryGirl.create :user
+      userd = FactoryGirl.create :user
       @usera.follow!(@userb)
       @userb.follow!(@usera)
       @usera.follow!(userc)
@@ -458,8 +458,8 @@ describe ActsAsAmico do
       @usera.reciprocated_count.should be(2)
     end
     it 'should return the correct count for non-id keys' do
-      userc = Factory :user
-      userd = Factory :user
+      userc = FactoryGirl.create :user
+      userd = FactoryGirl.create :user
       @usera.follow!(@admin)
       @admin.follow!(@usera)
       @usera.follow!(userc)
@@ -604,8 +604,8 @@ describe ActsAsAmico do
 
     describe '#pending_count' do
       it 'should return the correct count' do
-        userc = Factory :user
-        userd = Factory :user
+        userc = FactoryGirl.create :user
+        userd = FactoryGirl.create :user
         @usera.follow!(@userb)
         @userb.follow!(@usera)
         @usera.follow!(userc)

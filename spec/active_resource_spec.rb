@@ -19,8 +19,8 @@ describe ActsAsAmico do
   end
 
   before :each do
-    @usera = Factory :user
-    @admin = Factory :admin
+    @usera = FactoryGirl.create :user
+    @admin = FactoryGirl.create :admin
     @rest_object = RestObject.find(321)
   end
 
