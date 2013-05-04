@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'rspec'
+require 'rspec/core'
 require 'amico'
 require 'acts_as_amico'
 require 'factory_girl'
